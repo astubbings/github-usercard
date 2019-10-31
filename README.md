@@ -31,6 +31,8 @@ In this project we are going to be accessing the GitHub API and building a socia
 * [ ] Add your project manager as a reviewer on the pull-request
 * [ ] Your project manager will count the project as complete by merging the branch back into master.
 
+change for pull req
+
 ### Preprocessor Setup
 
   * None. We have gone ahead and taken care of this step for you. Focus on the Javascript 😁.
