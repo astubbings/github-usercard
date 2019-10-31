@@ -21,34 +21,22 @@ axios.get("https://api.github.com/users/astubbings")
   data:
     avatar_url: "https://avatars0.githubusercontent.com/u/53932400?v=4"
     bio: "Student at Lambda School "
-    blog: ""
-    company: null
-    created_at: "2019-08-09T07:11:11Z"
-    email: null
+    
     events_url: "https://api.github.com/users/astubbings/events{/privacy}"
     followers: 12
     followers_url: "https://api.github.com/users/astubbings/followers"
     following: 11
     following_url: "https://api.github.com/users/astubbings/following{/other_user}"
-    gists_url: "https://api.github.com/users/astubbings/gists{/gist_id}"
-    gravatar_id: ""
-    hireable: null
+    
     html_url: "https://github.com/astubbings"
-    id: 53932400
+    
     location: "Utah"
     login: "astubbings"
     name: "Alex S"
-    node_id: "MDQ6VXNlcjUzOTMyNDAw"
-    organizations_url: "https://api.github.com/users/astubbings/orgs"
+    
     public_gists: 0
     public_repos: 18
-    received_events_url: "https://api.github.com/users/astubbings/received_events"
-    repos_url: "https://api.github.com/users/astubbings/repos"
-    site_admin: false
-    starred_url: "https://api.github.com/users/astubbings/starred{/owner}{/repo}"
-    subscriptions_url: "https://api.github.com/users/astubbings/subscriptions"
-    type: "User"
-    updated_at: "2019-10-31T17:27:48Z"
+    
     url: "https://api.github.com/users/astubbings"
 
 
@@ -120,9 +108,17 @@ function githubCard(newProfile) {
 
   ghImg.src = newProfile.avatar_url;
   ghName.textContent = newProfile.name;
-  ghUserName.textContent = newProfile.
+  ghUserName.textContent = newProfile.login;
+  ghLocation.textContent = `Location: ${newProfile.location}`;
+  ghProfileLink.textContent = `Profile: ${ghProfileLinkAnchor}`;
+  ghProfileLinkAnchor.href = newProfile.html_url;
+  ghProfileLinkAnchor.textContent = newProfile.html_url;
+  ghFollowers.textContent = `Followers: ${newProfile.followers}`;
+  ghFollowing.textContent = `Following: ${newProfile.following}`;
+  
 
-return ghCard
+return ghCard;
+
 }
 
 
