@@ -3,17 +3,6 @@
            https://api.github.com/users/<your name>
 */
 
-
-axios.get("https://api.github.com/users/astubbings")
-.then(response => {
-  console.log(response);
-// response.data.message.forEach(item => {
-//     const newDog = DogCard(item)
-//     entryPoint.appendChild(newDog)
-// })
-})
-
-
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function
@@ -57,8 +46,33 @@ axios.get("https://api.github.com/users/astubbings")
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
 
+
+const followersArray = [
+  'astubbings',
+  'JacobWashburn',
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
+
+
+const getClassCards = document.querySelector('.cards')
+
+followersArray.forEach(items => {
+
+    axios.get(`https://api.github.com/users/${items}`)
+      .then(response => {
+        console.log(response);
+        getClassCards.appendChild(githubCard(response.data));
+      })
+      .catch(error => {
+        console.log(error.message)
+      })
+
+})
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
 
@@ -88,34 +102,35 @@ function githubCard(newProfile) {
       const ghUserName = document.createElement('p');
       const ghLocation = document.createElement('p');
       const ghProfileLink = document.createElement('p');
+      //this is goofy but the text had to be created so it didn't overwrite the 'a' tag text
+      ghProfileLink.textContent = 'Profile: ';
         const ghProfileLinkAnchor = document.createElement('a');
       const ghFollowers = document.createElement('p');
       const ghFollowing = document.createElement('p');
       const ghBio = document.createElement('p');
 
-  
   //classList
-
   ghCard.classList.add('card');
   ghInfo.classList.add('card-info');
   ghName.classList.add('name');
   ghUserName.classList.add('username');
 
-  //appending elements
+  //structure - appending elements
   ghCard.append(ghImg, ghInfo);
   ghInfo.append(ghName, ghUserName, ghLocation, ghProfileLink, ghFollowers, ghFollowing, ghBio)
   ghProfileLink.append(ghProfileLinkAnchor);
 
+
+  // element attributes
   ghImg.src = newProfile.avatar_url;
   ghName.textContent = newProfile.name;
   ghUserName.textContent = newProfile.login;
   ghLocation.textContent = `Location: ${newProfile.location}`;
-  ghProfileLink.textContent = `Profile: ${ghProfileLinkAnchor}`;
-  ghProfileLinkAnchor.href = newProfile.html_url;
-  ghProfileLinkAnchor.textContent = newProfile.html_url;
+   ghProfileLinkAnchor.href = newProfile.html_url;
+   ghProfileLinkAnchor.textContent = newProfile.html_url;
   ghFollowers.textContent = `Followers: ${newProfile.followers}`;
   ghFollowing.textContent = `Following: ${newProfile.following}`;
-  
+  ghBio.textContent = `Bio: ${newProfile.bio}`
 
 return ghCard;
 
